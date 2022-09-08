@@ -15,7 +15,6 @@ jobs:
     outputs:
       branch_name: ${{ steps.branch-name.outputs.branch_name }}
       escaped_branch_name: ${{ steps.escaped-branch-name.outputs.escaped_branch_name }}
-      base_branch_name: ${{ steps.base-branch-name.outputs.base_branch_name }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -24,14 +23,10 @@ jobs:
         run: echo "::set-output name=branch_name::${{ github.head_ref }}"
       - id: escaped-branch-name
         run: echo "::set-output name=escaped_branch_name::$(echo ${{ github.head_ref }} | sed -e 's/\//\\\//g')"
-      - id: base-branch-name
-        run: echo "::set-output name=base_branch_name::${{ github.base_ref }}"
       - name: Check output branch-name
         run: echo ${{ steps.branch-name.outputs.branch_name }}
       - name: Check output escaped-branch-name
         run: echo ${{ steps.escaped-branch-name.outputs.escaped_branch_name }}
-      - name: Check output base-branch-name
-        run: echo ${{ steps.base-branch-name.outputs.base_branch_name }}
 
   update-kommander-branch:
     runs-on: ubuntu-latest
