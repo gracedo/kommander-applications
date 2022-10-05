@@ -1,0 +1,22 @@
+name: "Update service-labels.yml"
+on:
+  pull_request:
+    branches:
+      - main
+      - 'release/*'
+    paths:
+      - 'services/**/*'
+  workflow_dispatch: {}
+
+jobs:
+  update-service-labels-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update .github/service-labeler.yaml
+        run: make workflow-labeler-yaml-update
