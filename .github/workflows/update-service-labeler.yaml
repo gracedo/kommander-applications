@@ -1,4 +1,4 @@
-name: "Update service-labels.yml"
+name: "Update service-labeler.yaml"
 on:
   pull_request:
     branches:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup asdf
