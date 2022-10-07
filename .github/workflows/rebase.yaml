@@ -25,7 +25,13 @@ jobs:
           git_user_signingkey: true
           git_commit_gpgsign: true
           git_tag_gpgsign: true
+          git_push_gpgsign: true
           git_config_global: true
+
+      - name: Set up Git
+        run: |
+          git config --global user.email xgrace@gmail.com
+          git config --global user.name Grace Do
 
       - name: Automatic Rebase
         uses: cirrus-actions/rebase@1.7
